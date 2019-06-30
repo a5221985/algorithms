@@ -27,7 +27,7 @@ bool destroy(HashMap **map, int size);
 
 int main()
 {
-	int size = 10;
+	int size = 1024;
 	HashMap *map = initialize(size);
 
 	put(&map, "one", 3, 1);
