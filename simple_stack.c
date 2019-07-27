@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "stdbool.h"
-#include "stack.h"
+#include "simple_stack.h"
 
 Stack* initialize()
 {
@@ -13,9 +13,9 @@ Stack* initialize()
 	return stack;
 }
 
-bool push(Stack **stack, Node **node)
+bool push(Stack **stack, int data)
 {
-	if (stack == NULL || (*stack) == NULL || node == NULL || (*node) == NULL)
+	if (stack == NULL || (*stack) == NULL)
 		return false;
 
 	SNode *snode = malloc(sizeof(SNode));
@@ -23,7 +23,7 @@ bool push(Stack **stack, Node **node)
 	if (snode == NULL)
 		return false;
 
-	snode->node = *node;
+	snode->data = data;
 	snode->next = (*stack)->top;
 
 	(*stack)->top = snode;
@@ -31,7 +31,7 @@ bool push(Stack **stack, Node **node)
 	return true;
 }
 
-bool pop(Stack **stack, Node **node)
+bool pop(Stack **stack, int *data)
 {
 	if (isEmpty(stack))
 	{
@@ -39,7 +39,7 @@ bool pop(Stack **stack, Node **node)
 	}
 
 	SNode *top = (*stack)->top;
-	(*node) = top->node;
+	(*data) = top->data;
 
 	(*stack)->top = (*stack)->top->next;
 
