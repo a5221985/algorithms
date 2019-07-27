@@ -48,6 +48,18 @@ bool pop(Stack **stack, int *data)
 	return true;
 }
 
+bool peek(Stack **stack, int *data)
+{
+	if (isEmpty(stack))
+	{
+		return false;
+	}
+
+	SNode *top = (*stack)->top;
+	(*data) = top->data;
+
+	return true;
+}
 
 bool destroy(Stack **S)
 {
