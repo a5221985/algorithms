@@ -1,6 +1,11 @@
 #include "simple_stack.h"
 
-bool sort(Stack **source_stack, Stack **temp_stack, Stack **final_stack)
+bool compare(int a, int b, bool ascending)
+{
+    return ascending? a > b: a < b;
+}
+
+bool sort(Stack **source_stack, Stack **temp_stack, Stack **final_stack, bool ascending)
 {
     if (isEmpty(source_stack))
         return false;
@@ -15,7 +20,7 @@ bool sort(Stack **source_stack, Stack **temp_stack, Stack **final_stack)
         int data;
         pop(&current_stack, &data);
         
-        if (data < min)
+        if (compare(data, min, ascending))
         {
             push(&next_stack, min);
             min = data;    
@@ -31,9 +36,8 @@ bool sort(Stack **source_stack, Stack **temp_stack, Stack **final_stack)
             current_stack = next_stack;
             next_stack = t_stack;
             push(final_stack, min);
+            pop(&current_stack, &min);
         }
-  
-        printf("min: %d\n", min);
     }
     return true;    
 }
@@ -55,7 +59,8 @@ int main()
     push(&source_stack, 10);
     push(&source_stack, 6);
     
-    sort(&source_stack, &temp_stack, &final_stack);
+    bool ascending = true;
+    sort(&source_stack, &temp_stack, &final_stack, ascending);
 
     int data;
     while(!isEmpty(&final_stack))
