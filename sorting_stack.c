@@ -2,26 +2,26 @@
 
 bool sort(Stack **source_stack, Stack **temp_stack, Stack **final_stack)
 {
+    if (isEmpty(source_stack))
+        return false;
+
     Stack *current_stack = *source_stack;
     Stack *next_stack = *temp_stack;
+    int min;
+    pop(&current_stack, &min);
+
     while (!isEmpty(&current_stack))
     {
         int data;
         pop(&current_stack, &data);
-        if (isEmpty(final_stack))
-        {
-            push(final_stack, data);
-            continue;
-        }
         
-        int final_top;
-        peek(final_stack, &final_top);
-        if (data < final_top)
+        if (data < min)
         {
-            pop(final_stack, &final_top);
-            push(final_stack, data);
-            push(&next_stack, final_top);
-        } else {
+            push(&next_stack, min);
+            min = data;    
+        }
+        else 
+        {
             push(&next_stack, data);
         }
 
@@ -30,7 +30,10 @@ bool sort(Stack **source_stack, Stack **temp_stack, Stack **final_stack)
             Stack *t_stack = current_stack;
             current_stack = next_stack;
             next_stack = t_stack;
+            push(final_stack, min);
         }
+  
+        printf("min: %d\n", min);
     }
     return true;    
 }

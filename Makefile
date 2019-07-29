@@ -2,6 +2,8 @@
 
 CC=gcc # compiler
 
+all: clean queue_using_stack sorting_stack
+
 queue_using_stack: simple_stack.o # target name
 	#$(CC) -o queue_using_stack queue_using_stack.c simple_stack.o
 	$(CC) -o queue_using_stack queue_using_stack.c -L/Users/am/Documents/algorithms -lsimple_stack
