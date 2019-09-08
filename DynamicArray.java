@@ -1,6 +1,5 @@
 import java.util.Iterator;
 
-
 @SuppressWarnings("unchecked")
 public class DynamicArray<T> implements Iterable<T> {
     public static final int DEFAULT_CAPACITY = 16;
