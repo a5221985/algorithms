@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 public class MinHeap {
     List<Integer> heap = new ArrayList<>();
@@ -57,9 +59,14 @@ public class MinHeap {
 
     public static void main(String[] args) {
         MinHeap mh = new MinHeap();
-        for (int i = 0; i < 10; i++)
-            mh.insert((int) (10.0 * Math.random()));
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < 100; i++)
+            set.add((int) (100.0 * Math.random()));
+
+        for (Integer item : set)
+            mh.insert((int) item);
+
         while (!mh.isEmpty())
-            System.out.println(mh.poll());
+            System.out.print(mh.poll() + " ");
     }
 }
