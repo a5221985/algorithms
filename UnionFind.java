@@ -9,8 +9,13 @@ public class UnionFind {
     List<Integer> uf;
 
     public UnionFind(final List<Character> list) {
-        map = list.stream().collect(Collectors.toMap(e -> e, e -> (int) (e - 'a')));
-        uf = list.stream().map(e -> (int) (e - 'a')).collect(Collectors.toList()); 
+        map = list
+                .stream()
+                .collect(Collectors.toMap(e -> e, e -> (int) (e - 'a')));
+        uf = list
+               .stream()
+               .map(e -> (int) (e - 'a'))
+               .collect(Collectors.toList()); 
     }
 
     public Boolean find(Character a, Character b) {
@@ -34,6 +39,9 @@ public class UnionFind {
         Integer i2 = map.get(b);
         Integer r1 = findRoot(i1);
         Integer r2 = findRoot(i2);
+
+        if (r1 == r2) return;
+
         uf.set(r2, r1);
         compress(i1, r1);
         compress(i2, r1);
@@ -47,7 +55,12 @@ public class UnionFind {
     }
 
     public void printMap() {
-        map.keySet().stream().forEach(i -> System.out.println("{" + i + " -> " + map.get(i) + "}"));        
+        map
+         .keySet()
+         .stream()
+         .forEach(
+            i -> System.out.println("{" + i + " -> " + map.get(i) + "}")
+         );        
     }
 
     public void print() {
