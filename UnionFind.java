@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class UnionFind {
     Map<Character, Integer> map;
     List<Integer> uf;
+    int numComponents;
 
     public UnionFind(final List<Character> list) {
         map = list
@@ -16,6 +17,7 @@ public class UnionFind {
                .stream()
                .map(e -> (int) (e - 'a'))
                .collect(Collectors.toList()); 
+        numComponents = list.size();
     }
 
     public Boolean find(Character a, Character b) {
@@ -45,6 +47,7 @@ public class UnionFind {
         uf.set(r2, r1);
         compress(i1, r1);
         compress(i2, r1);
+        numComponents--;
     }
 
     public void compress(Integer i, Integer r) {
