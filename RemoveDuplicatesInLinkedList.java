@@ -1,3 +1,6 @@
+import java.util.Set;
+import java.util.HashSet;
+
 public class RemoveDuplicatesInLinkedList {
     class Node {
         int data;
@@ -17,7 +20,7 @@ public class RemoveDuplicatesInLinkedList {
             head = tail;
     }
    
-    public void removeDuplicates() {
+    public void removeDuplicatesSorted() {
         Node current = head;
         while (current != null && current.next != null) {
             Node next = current.next;
@@ -26,6 +29,25 @@ public class RemoveDuplicatesInLinkedList {
                 next = next.next;
             }
             current = current.next;
+        }
+    }
+
+    public void removeDuplicatesUnsorted() {
+        if (head == null)
+            return;
+        Node current = head;
+        Node next = current.next;
+        Set<Integer> lookupTable = new HashSet<>();
+        while (next != null) {
+            lookupTable.add(current.data);
+            while (next != null && lookupTable.contains(next.data)) {
+                current.next = next.next;
+                next = next.next;
+            }
+            if (current != null && next != null) {
+                current = current.next;
+                next = next.next;
+            }
         }
     }
 
@@ -50,7 +72,21 @@ public class RemoveDuplicatesInLinkedList {
         rdill.append(5);
         rdill.print();
 
-        rdill.removeDuplicates();
+        rdill.removeDuplicatesSorted();
         rdill.print();
+
+        RemoveDuplicatesInLinkedList rdill1 = new RemoveDuplicatesInLinkedList();
+        rdill1.append(2);
+        rdill1.append(1);
+        rdill1.append(1);
+        rdill1.append(5);
+        rdill1.append(4);
+        rdill1.append(3);
+        rdill1.append(5);
+        rdill1.append(3);
+        rdill1.print();
+
+        rdill1.removeDuplicatesUnsorted();
+        rdill1.print();
     }
 }
