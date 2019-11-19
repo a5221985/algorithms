@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class RomanNumbers {
     private Map<Integer, String> map = new HashMap<>();
-    private List<Integer> list = new ArrayList<>();
+    private List<Integer> list;
 
     public RomanNumbers() {
         map.put(1, "I");
