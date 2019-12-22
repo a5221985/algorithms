@@ -40,7 +40,7 @@ public class StackWithArray<T> {
 
     public static void main(String[] args) {
         StackWithArray<Integer> stack = new StackWithArray<>();
-        for (int i = 0; i < 500; i++)
+        for (int i = 0; i < 50000; i++)
             stack.push(i);
         while (!stack.isEmpty())
             System.out.print(stack.pop() + " ");
