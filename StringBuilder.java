@@ -15,7 +15,7 @@ public class StringBuilder {
         capacity = initialCapacity;
     }
 
-    public StringBuilder append(String string) {
+    public synchronized StringBuilder append(String string) {
         resizeIfRequired(string.length());
         copy(string);
         return this;
@@ -48,7 +48,7 @@ public class StringBuilder {
         stringArray = newStringArray;
     }
 
-    public String toString() {
+    public synchronized String toString() {
         return new String(stringArray);
     }
 
