@@ -1,8 +1,19 @@
 public class StringBuilder {
     static final int DEFAULT_SIZE = 10;    
-    char[] stringArray = new char[DEFAULT_SIZE];
-    int capacity = DEFAULT_SIZE;
+    char[] stringArray;
+    int capacity;
     int size = 0;
+
+    public StringBuilder() {
+        this(DEFAULT_SIZE);
+    }
+
+    public StringBuilder(int initialCapacity) {
+        if (initialCapacity < 0)
+            throw new IllegalArgumentException("initialCapacity cannot be negative");
+        stringArray = new char[initialCapacity];
+        capacity = initialCapacity;
+    }
 
     public StringBuilder append(String string) {
         resizeIfRequired(string.length());
