@@ -70,14 +70,16 @@ public class LinkedList<T> implements Iterable<T> {
      */
     @Override
     public Iterator<T> iterator() {
-        if (iterator.current == null)
-            iterator.current = head;
-        return iterator;
+        return new ListIterator<T>(head);
     }
 
     private class ListIterator<T> implements Iterator<T> {
 
         private Node<T> current;
+
+        public ListIterator(Node<T> head) {
+            current = head;
+        }
 
         @Override
         public boolean hasNext() {
@@ -90,8 +92,6 @@ public class LinkedList<T> implements Iterable<T> {
             return current.data;
         }
     }
-
-    private ListIterator<T> iterator = new ListIterator<>();
 
     /**
      * Tests
@@ -106,6 +106,13 @@ public class LinkedList<T> implements Iterable<T> {
 
         for (Integer item : list)
             System.out.print(item + " ");
+
+        System.out.println();
+
+        for (Iterator<Integer> iterator = list.iterator(); iterator.hasNext();) {
+            Integer item = iterator.next();
+            System.out.print(item + " ");
+        }
 
         System.out.println();
     }
