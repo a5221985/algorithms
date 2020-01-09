@@ -82,5 +82,12 @@ public class QuickSort {
         qs.sort(e);
         System.out.println("Sorted Array:");
         qs.print(e);
+
+        Integer[] f = new Integer[] {1, 3, 5, 7, 9, 8, 6, 4, 2};
+        System.out.println("Original Array:");
+        qs.print(f);
+        qs.sort(f);
+        System.out.println("Sorted Array:");
+        qs.print(f);
     }
 }
