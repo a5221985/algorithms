@@ -1,10 +1,7 @@
-public class LeavesChainFromBST {
-    class Node {
-        Integer data;
-        Node left;
-        Node right;
-    }
+import java.util.List;
+import java.util.ArrayList;
 
+public class LeavesChainFromBST {
     private Node root;
 
     public List<Node> getLeavesChain() {
@@ -53,4 +50,10 @@ public class LeavesChainFromBST {
 
         lcfb.getLeavesChain();
     }
+}
+
+class Node {
+    Integer data;
+    Node left;
+    Node right;
 }
