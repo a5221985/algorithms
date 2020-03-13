@@ -74,13 +74,16 @@ public class PetStore {
         petStore.add("c7");
         petStore.add("c8");
 
-        System.out.println(petStore.get());
-        System.out.println(petStore.get(PetType.DOG));
-        System.out.println(petStore.get(PetType.DOG));
-        System.out.println(petStore.get(PetType.DOG));
-        System.out.println(petStore.get(PetType.DOG));
-        System.out.println(petStore.get(PetType.DOG));
-        System.out.println(petStore.get(PetType.CAT));
-        System.out.println(petStore.get(PetType.CAT));
+        System.out.println("ANY: " + petStore.get());
+        System.out.println("ANY: " + petStore.get());
+        System.out.println("ANY: " + petStore.get());
+        System.out.println("DOG: " + petStore.get(PetType.DOG));
+        System.out.println("DOG: " + petStore.get(PetType.DOG));
+        System.out.println("DOG: " + petStore.get(PetType.DOG));
+        System.out.println("CAT: " + petStore.get(PetType.CAT));
+        System.out.println("DOG: " + petStore.get(PetType.DOG));
+        System.out.println("DOG: " + petStore.get(PetType.DOG));
+        System.out.println("CAT: " + petStore.get(PetType.CAT));
+        System.out.println("CAT: " + petStore.get(PetType.CAT));
     }
 }
