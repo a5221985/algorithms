@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@SuppressWarnings("deprecation")
 public class RomanNumbers {
     private Map<Integer, String> map = new HashMap<>();
     private List<Integer> list;
