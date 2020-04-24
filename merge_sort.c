@@ -59,11 +59,11 @@ int main(void)
 	//int a[] = {28, 32, 9, 20, 10, 31, 13, 29, 2, 33, 30, 25, 39, 4, 26, 12, 34, 1, 11, 27, 16, 37, 38, 21, 24, 15, 7, 3, 36, 22, 23, 14, 18, 35, 17, 0, 19, 5, 6, 8};
 	//int size = sizeof(a) / sizeof(int);
 
-	int size = 10000;
+	int size = 100000;
 	int a[size];
 	srand((unsigned) time(NULL));
 	for (int i = 0; i < size; i++)
-		a[i] = rand();
+		a[i] = rand() % size;
 
 	print_array(a, size);
 	int* sorted = (int*) calloc(size, sizeof(int));
