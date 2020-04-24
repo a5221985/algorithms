@@ -3,3 +3,4 @@
 *.so
 *.class
 .quicklisp
+*.out

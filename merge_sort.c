@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void print_array(int* a, int size);
+void merge(int* left, int size_left, int* right, int size_right, int** merged);
+void merge_sort_range(int* a, int i, int j, int** sorted);
+void merge_sort(int* a, int size, int** sorted);
+
 void print_array(int* a, int size)
 {
 	for (int i = 0; i < size; i++)
@@ -51,8 +56,15 @@ void merge_sort(int* a, int size, int** sorted)
 
 int main(void)
 {
-	int a[] = {28, 32, 9, 20, 10, 31, 13, 29, 2, 33, 30, 25, 39, 4, 26, 12, 34, 1, 11, 27, 16, 37, 38, 21, 24, 15, 7, 3, 36, 22, 23, 14, 18, 35, 17, 0, 19, 5, 6, 8};
-	int size = 40;
+	//int a[] = {28, 32, 9, 20, 10, 31, 13, 29, 2, 33, 30, 25, 39, 4, 26, 12, 34, 1, 11, 27, 16, 37, 38, 21, 24, 15, 7, 3, 36, 22, 23, 14, 18, 35, 17, 0, 19, 5, 6, 8};
+	//int size = sizeof(a) / sizeof(int);
+
+	int size = 10000;
+	int a[size];
+	srand((unsigned) time(NULL));
+	for (int i = 0; i < size; i++)
+		a[i] = rand();
+
 	print_array(a, size);
 	int* sorted = (int*) calloc(size, sizeof(int));
 	merge_sort(a, size, &sorted);
