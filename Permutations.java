@@ -58,6 +58,6 @@ public class Permutations {
         String[] ps = p.permute(s);
 
         for (int i = 0; i < ps.length; i++)
-            System.out.println(ps[i]);
+            System.out.println((i + 1) + ":\t" + ps[i]);
     }
 }

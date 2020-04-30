@@ -8,9 +8,13 @@ void merge(int (*a)[], int i, int mid, int j);
 
 int main()
 {
-    int a[] = {4, 2, 1, 5, 9, 7, 8, 3, 6};
-    merge_sort(&a, 9);
-    print(a, 9);
+    int size = 10;
+    int a[size];
+    srand((unsigned) time(NULL));
+    for (int i = 0; i < size; i++)
+        a[i] = rand() % size;
+    //merge_sort(&a, size);
+    print(a, size);
     return 0;
 }
 
