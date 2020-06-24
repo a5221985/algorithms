@@ -5,17 +5,17 @@ public class SwapAdjacentNodesInList {
             return head;
         ListNode first = head;
         ListNode second = head.next;
+        ListNode third = null;
         head = head.next;
-        boolean isOdd = true;
         while (first != null && second != null) {
             first.next = second.next;
             second.next = first;
-            if (isOdd) {
+            if (third != null)
+                third.next = second;
+            third = first;
+            first = first.next;
+            if (first != null)
                 second = first.next;
-            } else {
-                first = first.next;
-            }
-            isOdd = !isOdd;
         }
         return head;
     }
@@ -35,7 +35,19 @@ public class SwapAdjacentNodesInList {
 
     public static void main(String[] args) {
         SwapAdjacentNodesInList sanil = new SwapAdjacentNodesInList();
-        ListNode four = new ListNode(4);
+        ListNode sixteen = new ListNode(16);
+        ListNode fifteen = new ListNode(15, sixteen);
+        ListNode fourteen = new ListNode(14, fifteen);
+        ListNode thirteen = new ListNode(13, fourteen);
+        ListNode twelve = new ListNode(12, thirteen);
+        ListNode eleven = new ListNode(11, twelve);
+        ListNode ten = new ListNode(10, eleven);
+        ListNode nine = new ListNode(9, ten);
+        ListNode eight = new ListNode(8, nine);
+        ListNode seven = new ListNode(7, eight);
+        ListNode six = new ListNode(6, seven);
+        ListNode five = new ListNode(5, six);
+        ListNode four = new ListNode(4, five);
         ListNode three = new ListNode(3, four);
         ListNode two = new ListNode(2, three);
         ListNode head = new ListNode(1, two);
