@@ -79,6 +79,22 @@ public class Math {
         return sin / cos;
     }
 
+    // O((log(n))^2)
+    public static int intSqrt(int x) {
+        int lower = 0;
+        int upper = x;
+        int trial = 1;
+        while ((upper - lower) > 1) {
+            while ((lower + trial)*(lower + trial) < x) {
+                trial <<= 1;
+            }
+            upper = lower + trial;
+            lower += trial >> 1;
+            trial = 1;
+        }
+        return upper*upper == x? upper: lower;
+    }
+
     public static void main(String[] args) {
         double k = 3.0;
         double val = Math.differential(x -> 2*x*x + 3*x + 5, k);
@@ -88,10 +104,11 @@ public class Math {
         double pow = Math.pow(x, p);
         System.out.println(pow);
         double rad = Math.PI / 4.0;
+        int sqr = 91;
         System.out.println(Math.sin(rad));
         System.out.println(Math.cos(rad));
         System.out.println(Math.tan(rad));
-        
+        System.out.println(Math.intSqrt(sqr)); 
     }
 }
 
