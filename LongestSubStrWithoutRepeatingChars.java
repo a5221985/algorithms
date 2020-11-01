@@ -27,7 +27,8 @@ public class LongestSubStrWithoutRepeatingChars {
     public static void main(String[] args) {
         LongestSubStrWithoutRepeatingChars lsswrc = new LongestSubStrWithoutRepeatingChars();
         //String str = "abcabcbb";
-        String str = "pwwkew";
+        //String str = "pwwkew";
+        String str = "abrexrzx";
         System.out.println(lsswrc.length(str));
     }
 }
