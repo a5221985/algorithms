@@ -1,58 +1,84 @@
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Arrays;
+
 public class AVLTree {
-    private class Node {
-        Integer data;
-        Node left;
-        Node right;
-        Integer balanceFactor;
-        Integer height;
+    private TreeNode tree;
+
+    public boolean insert(int val) {
+        if (tree == null) {
+            tree = new TreeNode(val);
+            return true;
+        }
+        TreeNode parent = binarySearchForParent(val);
+        System.out.println("parent: " + parent.val);
+        if (val <= parent.val)
+            parent.left = new TreeNode(val);
+        else
+            parent.right = new TreeNode(val);
+        return true;
     }
 
-    private Node tree;
-
-    public void insert(Integer data) {
-        Node newNode = new Node();
-        newNode.data = data;
+    TreeNode binarySearchForParent(int val) {
         if (tree == null)
-            tree = newNode;
-        else {
-            insert(tree, newNode);
-            newNode.
+            return null;
+        if (tree.val == val)
+            return tree;
+        TreeNode current = tree;
+        while (current.left != null || current.right != null) {
+            if (current.val == val)
+                return current;
+            else if (current.val < val) {
+                if (current.right == null)
+                    return current;
+                current = current.right;
+            } else {
+                if (current.left == null)
+                    return current;
+                current = current.left;
+            } 
         }
+        return current;
     }
 
-    void insert(Node tree, Node newNode) {
-        if (tree.data < newNode.data) {
-            if (tree.left == null)
-                tree.left = newNode;
-            else
-                insert(tree.left, newNode);
-        } else {
-            if (tree.right == null)
-                tree.right = newNode;
-            else
-                insert(tree.right, newNode);
-        }
-        rebalanceIfRequired();
+    public List<Integer> inorder() {
+        return inorder(tree);
+    }
+    
+    List<Integer> inorder(TreeNode tree) {
+        if (tree == null)
+            return new LinkedList<>();
+        if (tree.left == null && tree.right == null)
+            return new LinkedList<>(Arrays.asList(tree.val));
+        List<Integer> left = inorder(tree.left);
+        List<Integer> right = inorder(tree.right);
+        List<Integer> list = new LinkedList<>(left);
+        list.add(tree.val);
+        list.addAll(right);
+        return list;
     }
 
-    void rebalanceIfRequired() {
-                
+    public void print(List<Integer> list) {
+        if (list == null || list.isEmpty()) {
+            System.out.println("Empty List");
+            return;
+        }
+        System.out.println(list);
     }
 
     public static void main(String[] args) {
-        AVLTree avlTree = new AVLTree();
-
-        avlTree.insert(1);
-        avlTree.insert(2);
-        avlTree.insert(3);
-        avlTree.insert(4);
-        avlTree.insert(5);
-        avlTree.insert(6);
-        avlTree.insert(7);
-        avlTree.insert(8);
-        avlTree.insert(9);
-        avlTree.insert(10);
-
-        avlTree.printInOrder();
+        AVLTree aVLTree = new AVLTree();
+        int size = 10;
+        for (int i = 0; i < size; i++)
+            aVLTree.insert(i);
+        aVLTree.print(aVLTree.inorder());
     }
+}
+
+class TreeNode {
+    int val;
+    int height;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int val) { this.val = val; height = 1; }
 }
