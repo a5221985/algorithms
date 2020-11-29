@@ -2,21 +2,24 @@
 
 using namespace std;
 
-int find_sqrt(int num);
-int _sqrt(int num);
+bool find_sqrt(int num, int* sqrt);
+bool _sqrt(int num, int* sqrt);
 
-int find_sqrt(int num)
+bool find_sqrt(int num, int* sqrt)
 {
     if (num < 0) {
         cout << "num must not be negative" << endl;
-        return -1;
+        return false;
     }
-    if (num < 2)
-        return num;
-    return _sqrt(num);
+    if (num < 2) {
+        *sqrt = num;
+        return true;
+    }
+    _sqrt(num, sqrt);
+    return true;
 }
 
-int _sqrt(int num)
+bool _sqrt(int num, int* sqrt)
 {
     int low = 0;
     int high = num;
@@ -26,19 +29,23 @@ int _sqrt(int num)
     {
         mid = (low + high) >> 1;
         sqr = mid * mid;
-        if (sqr == num)
-            return mid;
+        if (sqr == num) {
+            *sqrt = mid;
+            return true;
+        }
         else if (sqr < num)
             low = mid;
         else
             high = mid; 
     }
-    return low;
+    *sqrt = low;
+    return true;
 }
 
 int main(int argc, char** argv)
 {
     int num = atoi(argv[1]);
-    int sqrt = find_sqrt(num);
-    cout << "square root of " << num << " is " << sqrt << endl;
+    int sqrt = 0;
+    if (find_sqrt(num, &sqrt))
+        cout << "square root of " << num << " is " << sqrt << endl;
 }
