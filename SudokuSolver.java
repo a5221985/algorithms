@@ -22,8 +22,7 @@ public class SudokuSolver {
             eliminatePossibilityFromColumn(cache, j, value, currentSet, queue);
             eliminatePossibilityFromBox(cache, i, j, value, currentSet, queue);
         }
-        printBoard(cache);
-        return sudokuBoard;
+        return constructBoardFromCache(cache);
     }
 
     public Map<Integer, Map<Integer, Set<String>>> constructCache(String[][] sudokuBoard, Queue<List<Integer>> queue) {
@@ -127,8 +126,9 @@ public class SudokuSolver {
     void printBoard(Map<Integer, Map<Integer, Set<String>>> cache) {
         int rowNum = 0;
         int columnNum = 0;
-        System.out.println("|-----------------------|");
+        System.out.println("+-------+-------+-------+");
         for (Map<Integer, Set<String>> row : cache.values()) {
+            columnNum = 0;
             for (Set<String> set : row.values()) {
                 if (columnNum % 3 == 0)
                     System.out.print("| ");
@@ -138,8 +138,38 @@ public class SudokuSolver {
             System.out.println("|");
             rowNum++;
             if (rowNum % 3 == 0)
-                System.out.println("|-----------------------|");
+                System.out.println("+-------+-------+-------+");
         }
+    }
+
+    void printBoard(String[][] sudokuBoard) {
+        for (int i = 0; i < sudokuBoard.length; i++) {
+            if (i % 3 == 0)
+                System.out.println("+-------+-------+-------+");
+            for (int j = 0; j < sudokuBoard[i].length; j++) {
+                if (j % 3 == 0)
+                    System.out.print("| ");
+                System.out.print(sudokuBoard[i][j] + " ");
+            }
+            System.out.println("|");
+        }
+        System.out.println("+-------+-------+-------+");
+    }
+
+    String[][] constructBoardFromCache(Map<Integer, Map<Integer, Set<String>>> cache) {
+        int rowNum = 0;
+        int columnNum = 0;
+        String[][] sudokuBoard = new String [cache.size()][];
+        for (Map<Integer, Set<String>> row : cache.values()) {
+            sudokuBoard[rowNum] = new String[row.size()];
+            columnNum = 0;
+            for (Set<String> set : row.values()) {
+                sudokuBoard[rowNum][columnNum] = set.iterator().next();
+                columnNum++;
+            }
+            rowNum++;
+        }
+        return sudokuBoard;
     }
 
     public static void main(String[] args) {
@@ -155,6 +185,9 @@ public class SudokuSolver {
             {".", ".", ".", "4", "1", "9", ".", ".", "5"},
             {".", ".", ".", ".", "8", ".", ".", "7", "9"}
         };
-        String[][] sudokuBoardSolved = ss.solve(sudokuBoard); 
+        ss.printBoard(sudokuBoard);
+        System.out.println();
+        String[][] sudokuBoardSolved = ss.solve(sudokuBoard);
+        ss.printBoard(sudokuBoardSolved);
     }
 }
