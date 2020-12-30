@@ -1,3 +1,4 @@
+*
 *.exe
 *.o
 *.so
@@ -5,3 +6,18 @@
 .quicklisp
 *.out
 *.dSYM
+
+!c
+!java
+!python
+!assembly
+!c_plus_plus
+!concurrency
+!math
+!multithreading
+
+!**/*.cpp
+!**/*.c
+!**/*.py
+!**/*.java
+!java/a.java
