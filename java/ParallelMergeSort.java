@@ -16,9 +16,10 @@ public class ParallelMergeSortExample {
 
         print(array);
 
+        ForkJoinPool fjp = new ForkJoinPool();
         ParallelMergeSort parallelMergeSort = new ParallelMergeSort(0, array.length, array);
 
-        parallelMergeSort.invoke();
+        fjp.invoke(parallelMergeSort);
 
         print(array);
     }
