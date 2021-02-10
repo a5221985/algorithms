@@ -8,7 +8,7 @@ public class ParallelMergeSortExample {
     }
 
     public static void main(String[] args) {
-        int size = 10000;
+        int size = 100000;
         int[] array = new int [size];
 
         for (int i = 0; i < array.length; i++)
@@ -16,19 +16,25 @@ public class ParallelMergeSortExample {
 
         print(array);
 
-        ForkJoinPool fjp = new ForkJoinPool();
+        ForkJoinPool fjp = new ForkJoinPool(4);
+       
         ParallelMergeSort parallelMergeSort = new ParallelMergeSort(0, array.length, array);
 
+        long startTime = System.nanoTime();
         fjp.invoke(parallelMergeSort);
+        //parallelMergeSort.invoke();
+        long endTime = System.nanoTime();
 
         print(array);
+
+        System.out.println("Time Taken: " + (endTime - startTime) + " nS");
     }
 }
 
 public class ParallelMergeSort extends RecursiveAction {
     private int start;
     private int end;
-    private int thresholdSize = 10;
+    private int thresholdSize = 1000;
     private int[] array;
     
     public ParallelMergeSort(int start, int end, int[] array) {
