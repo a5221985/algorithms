@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class FileHandler {
     void writeAndClose(String fileName, WritingProcess process) {
-        File file = new File(fileName);
         try {
+            File file = new File(fileName);
             file.createNewFile();
             invokeProcess(process, file);
         } catch (IOException ex) {
