@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define SIZEOF(a) ((sizeof(a)) / (sizeof(a[0]))) 
 
@@ -16,8 +17,14 @@ int main(int argc, char** argv) {
         exit(-1);
     }
 
-    uint32_t a[] = {9, 0, 1, 4, 2, 8, 5, 3, 6, 7};
+    srand(time(0));
+
+    uint32_t a[20];
     uint32_t size = SIZEOF(a);
+    double factor = (double) size / RAND_MAX;
+    for (int i = 0; i < size; i++)
+        a[i] = (uint32_t) (rand() * factor); 
+
     print(a, size);
 
     uint32_t k = atoi(argv[1]);
