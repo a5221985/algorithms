@@ -12,22 +12,26 @@ static void _swap(uint32_t *const a, uint32_t const i, uint32_t const j);
 void print(uint32_t const *const a, uint32_t const size);
 
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        printf("Usage is:\n\tquick_select <k-th-element>\n");
+    if (argc < 3) {
+        printf("Usage is:\n\tquick_select <array-size> <k-th-element>\n");
         exit(-1);
     }
 
     srand(time(0));
 
-    uint32_t a[20];
-    uint32_t size = SIZEOF(a);
+    uint32_t size = atoi(argv[1]);
+    uint32_t k = atoi(argv[2]);
+    if (k >= size) {
+        printf("k must be between [0, size)\n");
+        exit(-1);
+    }
+
+    uint32_t a[size];
     double factor = (double) size / RAND_MAX;
     for (int i = 0; i < size; i++)
         a[i] = (uint32_t) (rand() * factor); 
 
     print(a, size);
-
-    uint32_t k = atoi(argv[1]);
 
     uint32_t item = quickSelect(a, size, k);
     print(a, size);
@@ -40,6 +44,8 @@ uint32_t quickSelect(uint32_t *const a, uint32_t const size, uint32_t k) {
 }
 
 static uint32_t _quickSelect(uint32_t *const a, uint32_t const low, uint32_t high, uint32_t k) {
+    if (low >= high)
+        return low; 
     uint32_t p = _partition(a, low, high);
     if (k == p)
         return a[k];
