@@ -18,7 +18,7 @@ public class Trie {
 	public void insert(String word) {
 		int i = 0;
 		TrieNode current = root;
-		while (current.suffixes.containsKey(word.charAt(i))) {
+		while (i < word.length() && current.suffixes.containsKey(word.charAt(i))) {
 			current = current.suffixes.get(word.charAt(i));
 			i++;
 		}
@@ -58,6 +58,8 @@ public class Trie {
 		trie.insert("ape");
 		trie.insert("blas");
 		trie.insert("blast");
+		trie.insert("cat");
+		trie.insert("ca");
 
 		System.out.println("ap: " + trie.search("ap"));
 		System.out.println("ape: " + trie.search("ape"));
@@ -65,5 +67,8 @@ public class Trie {
 		System.out.println("apt: " + trie.search("apt"));
 		System.out.println("blas: " + trie.search("blas"));
 		System.out.println("blast: " + trie.search("blast"));
+		System.out.println("cap: " + trie.search("cap"));
+		System.out.println("cat: " + trie.search("cat"));
+		System.out.println("ca: " + trie.search("ca"));
 	}
 }
