@@ -2,41 +2,68 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Trie {
-    private TrieNode root = new TrieNode();
+	class TrieNode {
+		char character;
+		Map<Character, TrieNode> suffixes;
+		boolean isTerminal = false;
 
-    public void insert(String word) {
-        if (word == null || word.length() == 0)
-            return;
-        TrieNode current = root;
-        for (int i = 0; i < word.length(); i++) {
-            if (!current.nextCharMap.containsKey(word.charAt(i))) {
-                current.nextCharMap.put(word.charAt(i), new TrieNode(word.charAt(i), current));
-            } else {
-                if (i == word.length() - 1)
-                    current.nextCharMap.get(word.charAt(i)).isLastLetterInWord = true;
-            }
-            current = current.nextCharMap.get(word.charAt(i));
-        }
-    }
+		TrieNode(char character) {
+			this.character = character;
+			this.suffixes = new HashMap<>();
+		}
+	}
 
-    public static void main(String[] args) {
-        Trie trie = new Trie();
-        String word1 = "code";
-        trie.insert(word1);
-    }
-}
+	TrieNode root = new TrieNode('\0');
 
-class TrieNode {
-    char c;
-    Map<Character, TrieNode> nextCharMap = new HashMap<>();
-    TrieNode parent;
-    boolean isLastLetterInWord;
+	public void insert(String word) {
+		int i = 0;
+		TrieNode current = root;
+		while (current.suffixes.containsKey(word.charAt(i))) {
+			current = current.suffixes.get(word.charAt(i));
+			i++;
+		}
 
-    TrieNode() {
-    }
+		while (i < word.length()) {
+			TrieNode newNode = new TrieNode(word.charAt(i));
+			current.suffixes.put(word.charAt(i), newNode);
+			current = newNode;
+			i++;
+		}
 
-    TrieNode(char c, TrieNode parent) { 
-        this.c = c; 
-        this.parent = parent; 
-    }
+		current.isTerminal = true;
+	}
+
+	public boolean search(String word) {
+		TrieNode current = root;
+		int i = 0;
+		while (i < word.length()) {
+			if (!current.suffixes.containsKey(word.charAt(i))) {
+				return false;
+			}
+			current = current.suffixes.get(word.charAt(i));
+			i++;
+		}
+
+		if (!current.isTerminal) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static void main(String[] args) {
+		Trie trie = new Trie();
+
+		trie.insert("apple");
+		trie.insert("ape");
+		trie.insert("blas");
+		trie.insert("blast");
+
+		System.out.println("ap: " + trie.search("ap"));
+		System.out.println("ape: " + trie.search("ape"));
+		System.out.println("apple: " + trie.search("apple"));
+		System.out.println("apt: " + trie.search("apt"));
+		System.out.println("blas: " + trie.search("blas"));
+		System.out.println("blast: " + trie.search("blast"));
+	}
 }
